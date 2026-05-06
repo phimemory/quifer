@@ -20,21 +20,23 @@ Transaction order matters. Two wallets with identical transactions in different 
 
 Each transaction encodes 12 features: value, gas used, gas price, hour of day, day of week, nonce, contract call flag, error flag, block position, value bucket. These feed into a Helix phase cell one at a time. The final accumulated phase state is the fingerprint.
 
-## Real results - Arbitrum airdrop
+## Real results - three protocols
 
-Ran on 200 wallets that interacted with the Arbitrum airdrop distributor (`0x67a24CE4321aB3aF51c2D0a4801c3E111D88C9d9`, Arbitrum One). Wallets with fewer than 10 transactions skipped.
+| Protocol | Year | Chain | Wallets analyzed | Clusters | Flagged |
+|---|---|---|---|---|---|
+| Arbitrum ARB | 2023 | Arbitrum One | 179 | 10 | 70 (39%) |
+| Uniswap UNI | 2020 | Ethereum | 199 | 0 | 0 |
+| Hop HOP | 2022 | Ethereum | 191 | 0 | 0 |
 
-```
-Wallets analyzed:  179
-Clusters found:    10
-Wallets flagged:   70 (39.1%)
-```
+The null results are not failures. Uniswap UNI (2020) predates organized airdrop farming - wallets had rich, diverse histories that don't cluster. Hop explicitly excluded Sybils before distributing, so the claimers we analyzed are the ones that passed their filter. quifer finding nothing on a clean population is correct behavior.
 
-### Cluster 01 - 13 wallets, similarity 0.879
+The Arbitrum airdrop is where farms slipped through. quifer caught them.
+
+### Arbitrum - Cluster 01 (13 wallets, similarity 0.879)
 
 All 13 wallets had exactly 59 transactions. 12 of 13 called the SushiSwap V2 router (`0x1b02da8c...`) exactly 21 times each. Same contract, same call count, across 13 different wallets. Not coincidence - a script.
 
-### Cluster 02 - 11 wallets, similarity 1.000
+### Arbitrum - Cluster 02 (11 wallets, similarity 1.000)
 
 Every wallet had exactly 10 transactions in the same order:
 

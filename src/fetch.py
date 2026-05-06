@@ -23,6 +23,7 @@ AIRDROP_CONTRACTS = {
     "arbitrum":  ("0x67a24CE4321aB3aF51c2D0a4801c3E111D88C9d9", 42161),
     "optimism":  ("0xFEb56b15fD44C1F98bFBea5C3a11b71c8EeF9bB", 10),
     "uniswap":   ("0x090D4613473dEE047c3f2706764f49E0821D256e", 1),
+    "hop":       ("0xc5102fE9359FD9a28f877a67E36B0F050d81a3CC", 1),
 }
 
 # Map contract address -> chain ID for quick lookup
