@@ -18,7 +18,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent / "src"))
 
-from fetch import get_airdrop_claimers, fetch_batch
+from fetch import get_airdrop_claimers, fetch_batch, CONTRACT_CHAIN
 from fingerprint import WalletFingerprinter
 from cluster import find_clusters, score_wallet
 from report import print_summary, save_csv, save_json
@@ -70,7 +70,8 @@ def run_airdrop(contract: str, limit: int, threshold: float):
     addresses = addresses[:limit]
     print(f"  Found {len(addresses)} claimers, analyzing {len(addresses)}")
 
-    wallet_txs = fetch_batch(addresses)
+    chain_id = CONTRACT_CHAIN.get(contract.lower(), 1)
+    wallet_txs = fetch_batch(addresses, chain_id=chain_id)
     fingerprinter = WalletFingerprinter(hidden_size=64)
     fingerprints = fingerprinter.fingerprint_batch(wallet_txs)
     print(f"  Fingerprinted {len(fingerprints)} wallets")

@@ -12,17 +12,23 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-ETHERSCAN_API = "https://api.etherscan.io/api"
+ETHERSCAN_API = "https://api.etherscan.io/v2/api"
 API_KEY = os.getenv("ETHERSCAN_API_KEY", "")
 CACHE_DIR = Path(__file__).parent.parent / "data" / "tx_cache"
 CACHE_DIR.mkdir(parents=True, exist_ok=True)
 
-# Known airdrop contract addresses to filter transactions by.
-# Wallets that interacted with these are candidates for Sybil analysis.
+# Known airdrop contract addresses and their chain IDs.
+# chain 1 = Ethereum mainnet, 42161 = Arbitrum One, 10 = Optimism
 AIRDROP_CONTRACTS = {
-    "arbitrum":  "0x67a24CE4321aB3aF51c2D0a4801c3E111D88C9d9",
-    "optimism":  "0xFEb56b15fD44C1F98bFBea5C3a11b71c8EeF9bB",
-    "uniswap":   "0x090D4613473dEE047c3f2706764f49E0821D256e",
+    "arbitrum":  ("0x67a24CE4321aB3aF51c2D0a4801c3E111D88C9d9", 42161),
+    "optimism":  ("0xFEb56b15fD44C1F98bFBea5C3a11b71c8EeF9bB", 10),
+    "uniswap":   ("0x090D4613473dEE047c3f2706764f49E0821D256e", 1),
+}
+
+# Map contract address -> chain ID for quick lookup
+CONTRACT_CHAIN: dict[str, int] = {
+    addr.lower(): chain_id
+    for addr, chain_id in AIRDROP_CONTRACTS.values()
 }
 
 
@@ -30,9 +36,10 @@ def _cache_path(address: str) -> Path:
     return CACHE_DIR / f"{address.lower()}.json"
 
 
-def _get(params: dict) -> dict:
-    """Etherscan GET with rate-limit retry."""
+def _get(params: dict, chain_id: int = 1) -> dict:
+    """Etherscan V2 GET with rate-limit retry."""
     params["apikey"] = API_KEY
+    params["chainid"] = chain_id
     for attempt in range(3):
         try:
             r = requests.get(ETHERSCAN_API, params=params, timeout=10)
@@ -50,12 +57,12 @@ def _get(params: dict) -> dict:
     return {"status": "0", "result": []}
 
 
-def get_normal_txs(address: str, use_cache: bool = True) -> list[dict]:
+def get_normal_txs(address: str, use_cache: bool = True, chain_id: int = 1) -> list[dict]:
     """
-    Fetch normal (ETH) transactions for a wallet address.
+    Fetch normal transactions for a wallet address on the given chain.
     Returns list of tx dicts with: blockNumber, timeStamp, from, to, value, gasUsed, isError.
     """
-    cache = _cache_path(address)
+    cache = CACHE_DIR / f"{address.lower()}_{chain_id}.json"
     if use_cache and cache.exists():
         return json.loads(cache.read_text())
 
@@ -68,7 +75,7 @@ def get_normal_txs(address: str, use_cache: bool = True) -> list[dict]:
         "sort": "asc",
         "offset": 10000,
         "page": 1,
-    })
+    }, chain_id=chain_id)
 
     txs = data.get("result", [])
     if not isinstance(txs, list):
@@ -80,9 +87,9 @@ def get_normal_txs(address: str, use_cache: bool = True) -> list[dict]:
     return txs
 
 
-def get_erc20_txs(address: str, use_cache: bool = True) -> list[dict]:
+def get_erc20_txs(address: str, use_cache: bool = True, chain_id: int = 1) -> list[dict]:
     """Fetch ERC-20 token transfer history for a wallet."""
-    cache = CACHE_DIR / f"{address.lower()}_erc20.json"
+    cache = CACHE_DIR / f"{address.lower()}_erc20_{chain_id}.json"
     if use_cache and cache.exists():
         return json.loads(cache.read_text())
 
@@ -95,7 +102,7 @@ def get_erc20_txs(address: str, use_cache: bool = True) -> list[dict]:
         "sort": "asc",
         "page": 1,
         "offset": 10000,
-    })
+    }, chain_id=chain_id)
 
     txs = data.get("result", [])
     if not isinstance(txs, list):
@@ -110,9 +117,10 @@ def get_erc20_txs(address: str, use_cache: bool = True) -> list[dict]:
 def get_airdrop_claimers(contract_address: str, use_cache: bool = True) -> list[str]:
     """
     Fetch unique wallet addresses that interacted with an airdrop contract.
-    These are the candidate Sybil wallets to fingerprint.
+    Chain is resolved automatically from CONTRACT_CHAIN; defaults to mainnet.
     """
-    cache = CACHE_DIR / f"claimers_{contract_address.lower()}.json"
+    chain_id = CONTRACT_CHAIN.get(contract_address.lower(), 1)
+    cache = CACHE_DIR / f"claimers_{contract_address.lower()}_{chain_id}.json"
     if use_cache and cache.exists():
         return json.loads(cache.read_text())
 
@@ -125,7 +133,7 @@ def get_airdrop_claimers(contract_address: str, use_cache: bool = True) -> list[
         "sort": "asc",
         "page": 1,
         "offset": 10000,
-    })
+    }, chain_id=chain_id)
 
     txs = data.get("result", [])
     if not isinstance(txs, list):
@@ -139,9 +147,9 @@ def get_airdrop_claimers(contract_address: str, use_cache: bool = True) -> list[
     return addresses
 
 
-def fetch_batch(addresses: list[str], delay: float = 0.21) -> dict[str, list]:
+def fetch_batch(addresses: list[str], delay: float = 0.21, chain_id: int = 1) -> dict[str, list]:
     """
-    Fetch normal tx histories for a batch of addresses.
+    Fetch normal tx histories for a batch of addresses on the given chain.
     delay=0.21s keeps us under Etherscan's 5 req/sec free tier limit.
     Returns {address: [tx, ...]}
     """
@@ -149,8 +157,8 @@ def fetch_batch(addresses: list[str], delay: float = 0.21) -> dict[str, list]:
     results = {}
     for addr in tqdm(addresses, desc="fetching txs"):
         try:
-            results[addr] = get_normal_txs(addr)
-        except Exception as e:
+            results[addr] = get_normal_txs(addr, chain_id=chain_id)
+        except Exception:
             results[addr] = []
         time.sleep(delay)
     return results
