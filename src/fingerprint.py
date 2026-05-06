@@ -168,18 +168,27 @@ class WalletFingerprinter:
     def fingerprint_batch(
         self,
         wallet_txs: dict[str, list[dict]],
+        min_txs: int = 10,
     ) -> dict[str, torch.Tensor]:
         """
         Fingerprint a batch of wallets.
         wallet_txs: {address: [tx, ...]}
-        Returns {address: phase_tensor} for wallets with at least 1 tx.
+        min_txs: skip wallets with fewer transactions — low tx count gives
+                 low-entropy phase states that cluster falsely.
+        Returns {address: phase_tensor}.
         """
         from tqdm import tqdm
+        skipped = 0
         results = {}
         for addr, txs in tqdm(wallet_txs.items(), desc="fingerprinting"):
+            if len(txs) < min_txs:
+                skipped += 1
+                continue
             phi = self.fingerprint(addr, txs)
             if phi is not None:
                 results[addr] = phi
+        if skipped:
+            print(f"  skipped {skipped} wallets with fewer than {min_txs} txs")
         return results
 
     def harmonic_features(self, phi: torch.Tensor) -> torch.Tensor:
