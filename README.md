@@ -22,11 +22,20 @@ Each transaction encodes 12 features: value, gas used, gas price, hour of day, d
 
 ## Results
 
-Smoke test with simulated wallets:
+Smoke test (simulated phase states, no real transactions):
 
 - Wallet pair with the same behavior sequence: similarity = 0.998
 - Same wallet vs unrelated wallet: similarity = 0.09
 - Threshold for Sybil ring membership: 0.85
+
+Real-world validation pending. Planned: run on Eigenlayer and Arbitrum airdrop claimer sets where community Sybil reports already exist, to get a labeled benchmark.
+
+## Limitations
+
+- Only uses Etherscan normal transaction history. ERC-20 token transfers and internal transactions are not included yet.
+- Fingerprint quality depends on transaction count. Wallets with fewer than 20 transactions produce unreliable fingerprints.
+- No cross-chain support yet. A wallet that split activity across Ethereum, Arbitrum, and Optimism looks like three different wallets.
+- The similarity threshold (default 0.85) is conservative. You will miss loose clusters. Lower it to 0.75 to catch more, but expect more noise.
 
 ## Usage
 
