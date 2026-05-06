@@ -1,8 +1,8 @@
 # quifer
 
-Sybil detection via behavioral phase fingerprints.
+Finds Sybil farms by fingerprinting the order of every transaction a wallet ever made.
 
-Each wallet's full transaction history gets compressed into a 64-dimensional phase state using Helix, a phase-rotation sequence memory. Wallets that made similar transactions in similar order end up with similar phase states. Cluster by cosine similarity to find Sybil rings automatically.
+Each wallet's full transaction history gets compressed into a 64-dimensional phase state using Helix, a phase-rotation sequence memory. Wallets that ran the same script in the same order end up with the same fingerprint. Cluster by cosine similarity to find the rings.
 
 ## How it works
 
@@ -16,26 +16,45 @@ flowchart LR
     S -->|sim below 0.85| U[Unique wallet]
 ```
 
-Transaction order matters. Two wallets with 1,200 identical transactions in different order get different fingerprints. Phase accumulation is order-sensitive. Standard feature vectors lose this.
+Transaction order matters. Two wallets with identical transactions in different order get different fingerprints. Standard feature vectors lose this. Phase accumulation does not.
 
 Each transaction encodes 12 features: value, gas used, gas price, hour of day, day of week, nonce, contract call flag, error flag, block position, value bucket. These feed into a Helix phase cell one at a time. The final accumulated phase state is the fingerprint.
 
-## Results
+## Real results - Arbitrum airdrop
 
-Smoke test (simulated phase states, no real transactions):
+Ran on 200 wallets that interacted with the Arbitrum airdrop distributor (`0x67a24CE4321aB3aF51c2D0a4801c3E111D88C9d9`, Arbitrum One). Wallets with fewer than 10 transactions skipped.
 
-- Wallet pair with the same behavior sequence: similarity = 0.998
-- Same wallet vs unrelated wallet: similarity = 0.09
-- Threshold for Sybil ring membership: 0.85
+```
+Wallets analyzed:  179
+Clusters found:    10
+Wallets flagged:   70 (39.1%)
+```
 
-Real-world validation pending. Planned: run on Eigenlayer and Arbitrum airdrop claimer sets where community Sybil reports already exist, to get a labeled benchmark.
+### Cluster 01 - 13 wallets, similarity 0.879
+
+All 13 wallets had exactly 59 transactions. 12 of 13 called the SushiSwap V2 router (`0x1b02da8c...`) exactly 21 times each. Same contract, same call count, across 13 different wallets. Not coincidence - a script.
+
+### Cluster 02 - 11 wallets, similarity 1.000
+
+Every wallet had exactly 10 transactions in the same order:
+
+1. `claim()` on the airdrop distributor
+2. `transfer()` ARB out
+3. Send ETH back to `0x2ad57019...` (x3 times)
+4. `claim()` again
+5. `exactInputSingle()` on Uniswap V3
+6. `transfer()` ARB out again
+7. Send remaining ETH back to `0x2ad57019...`
+
+`0x2ad57019979999f9cef1cc72421ff28e796d8e90` is the operator's funding wallet - it sent ETH to all 11 farm wallets before the campaign and received it back after. quifer found not just the farm wallets but the operator behind them.
 
 ## Limitations
 
-- Only uses Etherscan normal transaction history. ERC-20 token transfers and internal transactions are not included yet.
-- Fingerprint quality depends on transaction count. Wallets with fewer than 20 transactions produce unreliable fingerprints.
-- No cross-chain support yet. A wallet that split activity across Ethereum, Arbitrum, and Optimism looks like three different wallets.
-- The similarity threshold (default 0.85) is conservative. You will miss loose clusters. Lower it to 0.75 to catch more, but expect more noise.
+- Only uses Etherscan normal transaction history. ERC-20 token transfers and internal transactions not included yet.
+- Wallets with fewer than 10 transactions are skipped. Low tx count = low entropy = unreliable fingerprint.
+- No cross-chain support. A farm split across Ethereum, Arbitrum, and Optimism looks like three separate farms.
+- Script-level farms are caught reliably. Manual farms (phone farms, human operators) produce noisier fingerprints - you would need to lower the threshold and accept more false positives.
+- The similarity threshold (default 0.85) is conservative. Lower to 0.75 to catch looser clusters, but expect noise.
 
 ## Usage
 
@@ -74,4 +93,4 @@ CSV columns: `cluster_id, cluster_size, mean_similarity, min_similarity, seed, a
 
 ## Built on
 
-[Helix](https://github.com/Cintu07/helix) - phase-rotation sequence memory architecture.
+[Helix](https://github.com/phimemory/helix) - phase-rotation sequence memory architecture.
