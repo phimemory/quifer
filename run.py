@@ -21,7 +21,9 @@ sys.path.insert(0, str(Path(__file__).parent / "src"))
 from fetch import get_airdrop_claimers, fetch_batch, CONTRACT_CHAIN
 from fingerprint import WalletFingerprinter
 from cluster import find_clusters, score_wallet
-from report import print_summary, save_csv, save_json
+from report import print_summary, print_combined_report, save_csv, save_json
+from temporal import cluster_by_timing
+from funding import find_shared_recipients, find_internal_funders
 
 
 # ------------------------------------------------------------------
@@ -72,14 +74,30 @@ def run_airdrop(contract: str, limit: int, threshold: float):
 
     chain_id = CONTRACT_CHAIN.get(contract.lower(), 1)
     wallet_txs = fetch_batch(addresses, chain_id=chain_id)
+
     fingerprinter = WalletFingerprinter(hidden_size=64)
     fingerprints = fingerprinter.fingerprint_batch(wallet_txs)
     print(f"  Fingerprinted {len(fingerprints)} wallets")
 
-    clusters = find_clusters(fingerprints, threshold=threshold)
-    print_summary(clusters, len(fingerprints))
-    save_csv(clusters)
-    save_json(clusters)
+    phase_clusters = find_clusters(fingerprints, threshold=threshold)
+
+    # Only run secondary signals on wallets that made it through fingerprinting
+    valid_addrs = {a.lower() for a in fingerprints}
+    valid_txs = {a: txs for a, txs in wallet_txs.items() if a.lower() in valid_addrs}
+
+    timing_clusters = cluster_by_timing(valid_txs, contract, min_cluster_size=3)
+    shared_recipients = find_shared_recipients(valid_txs, min_wallets=3, max_wallets=15)
+    internal_funders = find_internal_funders(valid_txs, min_funded=2)
+
+    print_combined_report(
+        len(fingerprints),
+        phase_clusters,
+        timing_clusters,
+        shared_recipients,
+        internal_funders,
+    )
+    save_csv(phase_clusters)
+    save_json(phase_clusters)
 
 
 def run_file(input_path: str, threshold: float):
