@@ -1,148 +1,59 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 480" width="1280" height="480">
-<defs>
-  <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-    <stop offset="0%" stop-color="#080A11"/>
-    <stop offset="100%" stop-color="#0A0D18"/>
-  </linearGradient>
-  <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
-    <feGaussianBlur in="SourceGraphic" stdDeviation="3.5" result="b"/>
-    <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-  </filter>
-  <pattern id="dots" width="36" height="36" patternUnits="userSpaceOnUse">
-    <circle cx="18" cy="18" r="0.6" fill="#10142A"/>
-  </pattern>
-  <linearGradient id="rfade" x1="0%" y1="0%" x2="100%" y2="0%">
-    <stop offset="0%" stop-color="#0A0D18" stop-opacity="0"/>
-    <stop offset="100%" stop-color="#0A0D18" stop-opacity="0.55"/>
-  </linearGradient>
-</defs>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 500" width="1500" height="500">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;800&amp;family=Space+Mono:wght@400&amp;display=swap');
+    </style>
+  </defs>
 
-<!-- background -->
-<rect width="1280" height="480" fill="url(#bg)"/>
-<rect width="1280" height="480" fill="url(#dots)"/>
+  <rect width="1500" height="500" fill="#000000"/>
 
-<!-- left section divider -->
-<line x1="320" y1="50" x2="320" y2="430" stroke="#16192C" stroke-width="1"/>
+  <!-- Left block: the wordmark -->
+  <text
+    x="200" y="330"
+    font-family="'Syne', 'Arial Black', Arial, sans-serif"
+    font-size="200"
+    font-weight="800"
+    fill="#FFFFFF"
+    text-anchor="start"
+    letter-spacing="-8"
+  >quifer</text>
 
-<!-- ============================================ -->
-<!-- LOGO MARK — center (175,240) r=100           -->
-<!-- N0(175,140) N1(262,190) N2(262,290)          -->
-<!-- N3(175,340) N4(88,290)  N5(88,190)           -->
-<!-- ============================================ -->
+  <!-- Vertical rule divider -->
+  <line x1="950" y1="80" x2="950" y2="420" stroke="#FFFFFF" stroke-width="1" opacity="0.3"/>
 
-<polygon points="175,140 262,190 262,290 175,340 88,290 88,190"
-  fill="none" stroke="#191D32" stroke-width="1.5" stroke-linejoin="round"/>
+  <!-- Right block: editorial metadata stack -->
+  <text
+    x="990" y="240"
+    font-family="'Syne', Arial, sans-serif"
+    font-size="36"
+    font-weight="800"
+    fill="#FFFFFF"
+    text-anchor="start"
+    letter-spacing="-1"
+  >Sybil Detection</text>
 
-<polygon points="175,140 262,190 88,190" fill="#00D9B5" opacity="0.05"/>
+  <text
+    x="990" y="280"
+    font-family="'Syne', Arial, sans-serif"
+    font-size="36"
+    font-weight="400"
+    fill="#FFFFFF"
+    text-anchor="start"
+    letter-spacing="-1"
+    opacity="0.5"
+  >Intelligence Layer</text>
 
-<line x1="175" y1="140" x2="262" y2="190" stroke="#00D9B5" stroke-width="2.4" stroke-linecap="round" opacity="0.9"/>
-<line x1="175" y1="140" x2="88"  y2="190" stroke="#00D9B5" stroke-width="2.4" stroke-linecap="round" opacity="0.9"/>
-<line x1="262" y1="190" x2="88"  y2="190" stroke="#00D9B5" stroke-width="1.5" stroke-linecap="round" opacity="0.45"/>
+  <line x1="990" y1="320" x2="1400" y2="320" stroke="#FFFFFF" stroke-width="1" opacity="0.2"/>
 
-<circle cx="262" cy="290" r="7" fill="#111525" stroke="#1D2140" stroke-width="1.5"/>
-<circle cx="175" cy="340" r="7" fill="#111525" stroke="#1D2140" stroke-width="1.5"/>
-<circle cx="88"  cy="290" r="7" fill="#111525" stroke="#1D2140" stroke-width="1.5"/>
-
-<circle cx="175" cy="140" r="21" fill="#00D9B5" opacity="0.07"/>
-<circle cx="262" cy="190" r="15" fill="#00D9B5" opacity="0.08"/>
-<circle cx="88"  cy="190" r="15" fill="#00D9B5" opacity="0.08"/>
-
-<circle cx="175" cy="140" r="9"   fill="#00D9B5" filter="url(#glow)"/>
-<circle cx="262" cy="190" r="7.5" fill="#00D9B5" filter="url(#glow)"/>
-<circle cx="88"  cy="190" r="7.5" fill="#00D9B5" filter="url(#glow)"/>
-
-<!-- ============================================ -->
-<!-- TEXT SECTION                                 -->
-<!-- ============================================ -->
-
-<!-- project name -->
-<text x="360" y="222"
-  font-family="'Inter','SF Pro Display','Segoe UI','Helvetica Neue',sans-serif"
-  font-size="80" font-weight="700" fill="#EDF0FC" letter-spacing="-1">quifer</text>
-
-<!-- teal accent -->
-<rect x="360" y="240" width="58" height="3" rx="1.5" fill="#00D9B5"/>
-
-<!-- tagline -->
-<text x="360" y="283"
-  font-family="'Inter','SF Pro Display','Segoe UI','Helvetica Neue',sans-serif"
-  font-size="17.5" font-weight="400" fill="#47506E">Finds Sybil farms by fingerprinting the order of every</text>
-<text x="360" y="308"
-  font-family="'Inter','SF Pro Display','Segoe UI','Helvetica Neue',sans-serif"
-  font-size="17.5" font-weight="400" fill="#47506E">transaction a wallet ever made.</text>
-
-<!-- pills -->
-<rect x="360" y="350" width="144" height="27" rx="13.5" fill="#0C1020" stroke="#1C2244" stroke-width="1"/>
-<text x="432" y="368.5"
-  font-family="'Inter','SF Pro Display','Segoe UI',sans-serif"
-  font-size="10.5" font-weight="500" fill="#00D9B5"
-  text-anchor="middle" letter-spacing="2">PHASE MEMORY</text>
-
-<rect x="516" y="350" width="100" height="27" rx="13.5" fill="#0C1020" stroke="#1C2244" stroke-width="1"/>
-<text x="566" y="368.5"
-  font-family="'Inter','SF Pro Display','Segoe UI',sans-serif"
-  font-size="10.5" font-weight="500" fill="#00D9B5"
-  text-anchor="middle" letter-spacing="2">3 SIGNALS</text>
-
-<rect x="628" y="350" width="106" height="27" rx="13.5" fill="#0C1020" stroke="#1C2244" stroke-width="1"/>
-<text x="681" y="368.5"
-  font-family="'Inter','SF Pro Display','Segoe UI',sans-serif"
-  font-size="10.5" font-weight="500" fill="#00D9B5"
-  text-anchor="middle" letter-spacing="2">ON-CHAIN</text>
-
-<!-- ============================================ -->
-<!-- RIGHT DECORATION: cluster visualization      -->
-<!-- ============================================ -->
-
-<!-- scattered bg wallet dots -->
-<circle cx="875" cy="95"  r="2.5" fill="#181D33"/>
-<circle cx="920" cy="158" r="2"   fill="#141830"/>
-<circle cx="885" cy="245" r="2.5" fill="#181D33"/>
-<circle cx="858" cy="335" r="2"   fill="#141830"/>
-<circle cx="908" cy="415" r="2.5" fill="#181D33"/>
-<circle cx="962" cy="72"  r="2"   fill="#141830"/>
-<circle cx="998" cy="212" r="2.5" fill="#181D33"/>
-<circle cx="972" cy="295" r="2"   fill="#141830"/>
-<circle cx="958" cy="382" r="2.5" fill="#181D33"/>
-<circle cx="1048" cy="125" r="2"  fill="#141830"/>
-<circle cx="1072" cy="268" r="2.5" fill="#181D33"/>
-<circle cx="1042" cy="392" r="2"  fill="#141830"/>
-<circle cx="1118" cy="78"  r="2.5" fill="#181D33"/>
-<circle cx="1152" cy="202" r="2"  fill="#141830"/>
-<circle cx="1128" cy="368" r="2.5" fill="#181D33"/>
-<circle cx="1198" cy="128" r="2"  fill="#141830"/>
-<circle cx="1228" cy="288" r="2.5" fill="#181D33"/>
-<circle cx="1258" cy="168" r="2"  fill="#141830"/>
-<circle cx="1248" cy="392" r="2.5" fill="#181D33"/>
-<circle cx="1080" cy="430" r="2"  fill="#141830"/>
-
-<!-- cluster A: 4-node ring (brighter) -->
-<line x1="948"  y1="168" x2="1004" y2="126" stroke="#00D9B5" stroke-width="1.2" opacity="0.55"/>
-<line x1="1004" y1="126" x2="1062" y2="158" stroke="#00D9B5" stroke-width="1.2" opacity="0.55"/>
-<line x1="1062" y1="158" x2="1028" y2="208" stroke="#00D9B5" stroke-width="1.2" opacity="0.55"/>
-<line x1="1028" y1="208" x2="948"  y2="168" stroke="#00D9B5" stroke-width="1.2" opacity="0.55"/>
-
-<circle cx="948"  cy="168" r="5.5" fill="#00D9B5" opacity="0.8" filter="url(#glow)"/>
-<circle cx="1004" cy="126" r="5.5" fill="#00D9B5" opacity="0.8" filter="url(#glow)"/>
-<circle cx="1062" cy="158" r="5.5" fill="#00D9B5" opacity="0.8" filter="url(#glow)"/>
-<circle cx="1028" cy="208" r="5"   fill="#00D9B5" opacity="0.8" filter="url(#glow)"/>
-
-<!-- cluster B: 3-node triangle (dimmer) -->
-<line x1="1138" y1="298" x2="1192" y2="262" stroke="#00D9B5" stroke-width="1" opacity="0.35"/>
-<line x1="1192" y1="262" x2="1242" y2="298" stroke="#00D9B5" stroke-width="1" opacity="0.35"/>
-<line x1="1192" y1="262" x2="1188" y2="335" stroke="#00D9B5" stroke-width="1" opacity="0.35"/>
-
-<circle cx="1138" cy="298" r="4.5" fill="#00D9B5" opacity="0.5" filter="url(#glow)"/>
-<circle cx="1192" cy="262" r="5"   fill="#00D9B5" opacity="0.5" filter="url(#glow)"/>
-<circle cx="1242" cy="298" r="4.5" fill="#00D9B5" opacity="0.5" filter="url(#glow)"/>
-<circle cx="1188" cy="335" r="4"   fill="#00D9B5" opacity="0.5" filter="url(#glow)"/>
-
-<!-- right edge fade -->
-<rect x="1095" y="0" width="185" height="480" fill="url(#rfade)"/>
-
-<!-- credit -->
-<text x="1268" y="466"
-  font-family="'Inter','SF Pro Display','Segoe UI',sans-serif"
-  font-size="10.5" fill="#22284A" text-anchor="end">built on helix</text>
+  <text
+    x="990" y="365"
+    font-family="'Space Mono', 'Courier New', monospace"
+    font-size="12"
+    font-weight="400"
+    fill="#FFFFFF"
+    text-anchor="start"
+    letter-spacing="2"
+    opacity="0.3"
+  >PHASE-ROTATION FINGERPRINTING · HELIX</text>
 
 </svg>

@@ -1,4 +1,4 @@
-# quifer
+![quifer](assets/banner.svg)
 
 Finds Sybil farms by fingerprinting the order of every transaction a wallet ever made.
 

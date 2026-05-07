@@ -1,58 +1,37 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="500" height="500">
-<defs>
-  <radialGradient id="bg" cx="50%" cy="42%" r="70%">
-    <stop offset="0%" stop-color="#0F1320"/>
-    <stop offset="100%" stop-color="#070910"/>
-  </radialGradient>
-  <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
-    <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="b"/>
-    <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-  </filter>
-  <pattern id="dots" width="32" height="32" patternUnits="userSpaceOnUse">
-    <circle cx="16" cy="16" r="0.65" fill="#111526"/>
-  </pattern>
-</defs>
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Syne:wght@800&amp;display=swap');
+    </style>
+  </defs>
 
-<!-- background -->
-<rect width="500" height="500" rx="32" fill="url(#bg)"/>
-<rect width="500" height="500" rx="32" fill="url(#dots)"/>
+  <rect width="500" height="500" fill="#FFFFFF"/>
 
-<!-- hex outline: N0(250,80) N1(350,137) N2(350,253) N3(250,310) N4(150,253) N5(150,137) -->
-<polygon points="250,80 350,137 350,253 250,310 150,253 150,137"
-  fill="none" stroke="#1C2038" stroke-width="1.5" stroke-linejoin="round"/>
+  <!--
+    Syne 800 at 96px:
+      cap-height  ~67px above baseline
+      descender   ~20px below baseline
+      total block ~87px
 
-<!-- cluster region fill (top triangle N0 N1 N5) -->
-<polygon points="250,80 350,137 150,137" fill="#00D9B5" opacity="0.045"/>
+    To center visually in 500px canvas:
+      visual mid  = baseline - (67/2) + (20/2) ≈ baseline - 23.5
+      set visual mid = 250  →  baseline = 273.5 ≈ 274
 
-<!-- cluster edges -->
-<line x1="250" y1="80"  x2="350" y2="137" stroke="#00D9B5" stroke-width="2.2" stroke-linecap="round" opacity="0.9"/>
-<line x1="250" y1="80"  x2="150" y2="137" stroke="#00D9B5" stroke-width="2.2" stroke-linecap="round" opacity="0.9"/>
-<line x1="350" y1="137" x2="150" y2="137" stroke="#00D9B5" stroke-width="1.5" stroke-linecap="round" opacity="0.45"/>
+    Rules sit flush to cap-top and descender with 28px breathing room each:
+      top rule  = 274 - 67 - 28 = 179
+      bot rule  = 274 + 20 + 28 = 322
+  -->
+  <line x1="60" y1="179" x2="440" y2="179" stroke="#000000" stroke-width="0.8"/>
+  <line x1="60" y1="322" x2="440" y2="322" stroke="#000000" stroke-width="0.8"/>
 
-<!-- inactive nodes N2 N3 N4 -->
-<circle cx="350" cy="253" r="7.5" fill="#111525" stroke="#1F2340" stroke-width="1.5"/>
-<circle cx="250" cy="310" r="7.5" fill="#111525" stroke="#1F2340" stroke-width="1.5"/>
-<circle cx="150" cy="253" r="7.5" fill="#111525" stroke="#1F2340" stroke-width="1.5"/>
+  <text
+    x="110" y="274"
+    font-family="'Syne', 'Arial Black', Arial, sans-serif"
+    font-size="96"
+    font-weight="800"
+    fill="#000000"
+    text-anchor="start"
+    letter-spacing="-2"
+  >quifer</text>
 
-<!-- active node glows -->
-<circle cx="250" cy="80"  r="24" fill="#00D9B5" opacity="0.07"/>
-<circle cx="350" cy="137" r="17" fill="#00D9B5" opacity="0.08"/>
-<circle cx="150" cy="137" r="17" fill="#00D9B5" opacity="0.08"/>
-
-<!-- active nodes N0 N1 N5 -->
-<circle cx="250" cy="80"  r="9.5" fill="#00D9B5" filter="url(#glow)"/>
-<circle cx="350" cy="137" r="8"   fill="#00D9B5" filter="url(#glow)"/>
-<circle cx="150" cy="137" r="8"   fill="#00D9B5" filter="url(#glow)"/>
-
-<!-- wordmark -->
-<text x="250" y="393"
-  font-family="'Inter','SF Pro Display','Segoe UI','Helvetica Neue',sans-serif"
-  font-size="54" font-weight="600" fill="#E8EBF8"
-  text-anchor="middle" letter-spacing="8">quifer</text>
-
-<!-- label -->
-<text x="250" y="433"
-  font-family="'Inter','SF Pro Display','Segoe UI','Helvetica Neue',sans-serif"
-  font-size="11.5" font-weight="500" fill="#2C3258"
-  text-anchor="middle" letter-spacing="4.5">SYBIL DETECTION</text>
 </svg>
