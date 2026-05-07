@@ -1,0 +1,273 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 520" width="1600" height="520">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Space+Mono&amp;family=Syne:wght@800&amp;display=swap');
+    </style>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.025)" stroke-width="1"/>
+    </pattern>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 1 L 9 5 L 0 9 z" fill="rgba(255,255,255,0.35)"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1600" height="520" fill="#000000"/>
+  <rect width="1600" height="520" fill="url(#grid)"/>
+
+  <!-- ─────────────────────────────────────────────────────────── -->
+  <!-- BLOCK 1: Wallets (x=40, w=200) -->
+  <!-- ─────────────────────────────────────────────────────────── -->
+  <rect x="40" y="100" width="200" height="280" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+
+  <text x="140" y="88" font-family="'Space Mono', monospace" font-size="9" fill="rgba(255,255,255,0.25)" text-anchor="middle" letter-spacing="2">WALLETS</text>
+
+  <!-- Address list -->
+  <text x="56" y="148" font-family="'Space Mono', monospace" font-size="9" fill="rgba(255,255,255,0.55)">0x7f3a8c...</text>
+  <text x="56" y="168" font-family="'Space Mono', monospace" font-size="9" fill="rgba(255,255,255,0.55)">0x2b9ce4...</text>
+  <text x="56" y="188" font-family="'Space Mono', monospace" font-size="9" fill="rgba(255,255,255,0.55)">0xab91f7...</text>
+  <text x="56" y="208" font-family="'Space Mono', monospace" font-size="9" fill="rgba(255,255,255,0.55)">0x4e1d22...</text>
+
+  <line x1="56" y1="222" x2="224" y2="222" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>
+
+  <text x="56" y="244" font-family="'Space Mono', monospace" font-size="9" fill="rgba(255,255,255,0.22)">0xc5a3b1...</text>
+  <text x="56" y="264" font-family="'Space Mono', monospace" font-size="9" fill="rgba(255,255,255,0.22)">0x8fe027...</text>
+  <text x="56" y="284" font-family="'Space Mono', monospace" font-size="9" fill="rgba(255,255,255,0.22)">0x1d9c84...</text>
+  <text x="56" y="304" font-family="'Space Mono', monospace" font-size="9" fill="rgba(255,255,255,0.22)">···</text>
+
+  <text x="140" y="355" font-family="'Space Mono', monospace" font-size="9" fill="rgba(255,255,255,0.15)" text-anchor="middle">n = 179</text>
+
+  <!-- Arrow 1→2 -->
+  <line x1="248" y1="240" x2="318" y2="240" stroke="rgba(255,255,255,0.3)" stroke-width="1" marker-end="url(#arrow)"/>
+  <text x="283" y="230" font-family="'Space Mono', monospace" font-size="7" fill="rgba(255,255,255,0.2)" text-anchor="middle">ordered</text>
+  <text x="283" y="256" font-family="'Space Mono', monospace" font-size="7" fill="rgba(255,255,255,0.2)" text-anchor="middle">by block</text>
+
+  <!-- ─────────────────────────────────────────────────────────── -->
+  <!-- BLOCK 2: Transaction Sequences (x=328, w=300) -->
+  <!-- ─────────────────────────────────────────────────────────── -->
+  <rect x="328" y="100" width="300" height="280" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+
+  <text x="478" y="88" font-family="'Space Mono', monospace" font-size="9" fill="rgba(255,255,255,0.25)" text-anchor="middle" letter-spacing="2">TX HISTORY</text>
+
+  <!-- Farm Wallet A label -->
+  <text x="344" y="138" font-family="'Space Mono', monospace" font-size="7.5" fill="rgba(255,255,255,0.3)">FARM WALLET A</text>
+  <!-- tx blocks row 1: pattern BBMBMBBMBM (B=bright, M=medium) -->
+  <rect x="344" y="144" width="18" height="18" fill="rgba(255,255,255,0.85)"/>
+  <rect x="365" y="144" width="18" height="18" fill="rgba(255,255,255,0.85)"/>
+  <rect x="386" y="144" width="18" height="18" fill="rgba(255,255,255,0.4)"/>
+  <rect x="407" y="144" width="18" height="18" fill="rgba(255,255,255,0.85)"/>
+  <rect x="428" y="144" width="18" height="18" fill="rgba(255,255,255,0.4)"/>
+  <rect x="449" y="144" width="18" height="18" fill="rgba(255,255,255,0.85)"/>
+  <rect x="470" y="144" width="18" height="18" fill="rgba(255,255,255,0.85)"/>
+  <rect x="491" y="144" width="18" height="18" fill="rgba(255,255,255,0.4)"/>
+  <rect x="512" y="144" width="18" height="18" fill="rgba(255,255,255,0.85)"/>
+  <rect x="533" y="144" width="18" height="18" fill="rgba(255,255,255,0.4)"/>
+
+  <!-- Farm Wallet B label - IDENTICAL pattern to A -->
+  <text x="344" y="185" font-family="'Space Mono', monospace" font-size="7.5" fill="rgba(255,255,255,0.3)">FARM WALLET B</text>
+  <rect x="344" y="191" width="18" height="18" fill="rgba(255,255,255,0.85)"/>
+  <rect x="365" y="191" width="18" height="18" fill="rgba(255,255,255,0.85)"/>
+  <rect x="386" y="191" width="18" height="18" fill="rgba(255,255,255,0.4)"/>
+  <rect x="407" y="191" width="18" height="18" fill="rgba(255,255,255,0.85)"/>
+  <rect x="428" y="191" width="18" height="18" fill="rgba(255,255,255,0.4)"/>
+  <rect x="449" y="191" width="18" height="18" fill="rgba(255,255,255,0.85)"/>
+  <rect x="470" y="191" width="18" height="18" fill="rgba(255,255,255,0.85)"/>
+  <rect x="491" y="191" width="18" height="18" fill="rgba(255,255,255,0.4)"/>
+  <rect x="512" y="191" width="18" height="18" fill="rgba(255,255,255,0.85)"/>
+  <rect x="533" y="191" width="18" height="18" fill="rgba(255,255,255,0.4)"/>
+
+  <!-- "identical" brace / label -->
+  <line x1="612" y1="148" x2="618" y2="148" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+  <line x1="618" y1="148" x2="618" y2="203" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+  <line x1="612" y1="203" x2="618" y2="203" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+  <text x="621" y="180" font-family="'Space Mono', monospace" font-size="7" fill="rgba(255,255,255,0.4)" dominant-baseline="middle">same</text>
+
+  <line x1="344" y1="225" x2="610" y2="225" stroke="rgba(255,255,255,0.07)" stroke-width="0.5"/>
+
+  <!-- Unique Wallet label - DIFFERENT pattern -->
+  <text x="344" y="246" font-family="'Space Mono', monospace" font-size="7.5" fill="rgba(255,255,255,0.2)">UNIQUE WALLET</text>
+  <rect x="344" y="252" width="18" height="18" fill="rgba(255,255,255,0.3)"/>
+  <rect x="365" y="252" width="18" height="18" fill="rgba(255,255,255,0.85)"/>
+  <rect x="386" y="252" width="18" height="18" fill="rgba(255,255,255,0.85)"/>
+  <rect x="407" y="252" width="18" height="18" fill="rgba(255,255,255,0.15)"/>
+  <rect x="428" y="252" width="18" height="18" fill="rgba(255,255,255,0.85)"/>
+  <rect x="449" y="252" width="18" height="18" fill="rgba(255,255,255,0.3)"/>
+  <rect x="470" y="252" width="18" height="18" fill="rgba(255,255,255,0.15)"/>
+  <rect x="491" y="252" width="18" height="18" fill="rgba(255,255,255,0.85)"/>
+  <rect x="512" y="252" width="18" height="18" fill="rgba(255,255,255,0.4)"/>
+  <rect x="533" y="252" width="18" height="18" fill="rgba(255,255,255,0.15)"/>
+
+  <text x="344" y="310" font-family="'Space Mono', monospace" font-size="8" fill="rgba(255,255,255,0.15)">order matters. same script = same pattern.</text>
+
+  <!-- Arrow 2→3 -->
+  <line x1="636" y1="240" x2="706" y2="240" stroke="rgba(255,255,255,0.3)" stroke-width="1" marker-end="url(#arrow)"/>
+  <text x="671" y="230" font-family="'Space Mono', monospace" font-size="7" fill="rgba(255,255,255,0.2)" text-anchor="middle">phase</text>
+  <text x="671" y="256" font-family="'Space Mono', monospace" font-size="7" fill="rgba(255,255,255,0.2)" text-anchor="middle">encode</text>
+
+  <!-- ─────────────────────────────────────────────────────────── -->
+  <!-- BLOCK 3: Helix Cell (x=716, w=220) -->
+  <!-- ─────────────────────────────────────────────────────────── -->
+  <rect x="716" y="100" width="220" height="280" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+
+  <text x="826" y="88" font-family="'Space Mono', monospace" font-size="9" fill="rgba(255,255,255,0.25)" text-anchor="middle" letter-spacing="2">HELIX CELL</text>
+
+  <!-- Concentric circles representing phase space -->
+  <circle cx="826" cy="248" r="82" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <circle cx="826" cy="248" r="64" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+  <circle cx="826" cy="248" r="46" fill="none" stroke="rgba(255,255,255,0.10)" stroke-width="1"/>
+  <circle cx="826" cy="248" r="28" fill="none" stroke="rgba(255,255,255,0.13)" stroke-width="1"/>
+
+  <!-- Phase accumulation path (a spiral-like polyline) -->
+  <polyline points="826,166 876,202 862,268 800,290 762,240 792,190 840,198 854,244 826,268 800,252" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="1.2" stroke-linejoin="round"/>
+
+  <!-- Phase points -->
+  <circle cx="826" cy="166" r="3.5" fill="rgba(255,255,255,0.9)"/>
+  <circle cx="876" cy="202" r="3" fill="rgba(255,255,255,0.7)"/>
+  <circle cx="862" cy="268" r="3" fill="rgba(255,255,255,0.6)"/>
+  <circle cx="800" cy="290" r="3" fill="rgba(255,255,255,0.5)"/>
+  <circle cx="762" cy="240" r="3" fill="rgba(255,255,255,0.5)"/>
+  <circle cx="826" cy="248" r="4" fill="rgba(255,255,255,0.95)"/>
+
+  <!-- Axis labels -->
+  <text x="826" y="145" font-family="'Space Mono', monospace" font-size="7" fill="rgba(255,255,255,0.2)" text-anchor="middle">φ accumulates</text>
+
+  <text x="826" y="357" font-family="'Space Mono', monospace" font-size="8" fill="rgba(255,255,255,0.15)" text-anchor="middle">φ_new = W(x)·φ + Δφ(x)</text>
+
+  <!-- Arrow 3→4 -->
+  <line x1="944" y1="240" x2="1014" y2="240" stroke="rgba(255,255,255,0.3)" stroke-width="1" marker-end="url(#arrow)"/>
+  <text x="979" y="230" font-family="'Space Mono', monospace" font-size="7" fill="rgba(255,255,255,0.2)" text-anchor="middle">64-dim</text>
+  <text x="979" y="256" font-family="'Space Mono', monospace" font-size="7" fill="rgba(255,255,255,0.2)" text-anchor="middle">output</text>
+
+  <!-- ─────────────────────────────────────────────────────────── -->
+  <!-- BLOCK 4: Phase State + Similarity (x=1024, w=280) -->
+  <!-- ─────────────────────────────────────────────────────────── -->
+  <rect x="1024" y="100" width="280" height="280" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+
+  <text x="1164" y="88" font-family="'Space Mono', monospace" font-size="9" fill="rgba(255,255,255,0.25)" text-anchor="middle" letter-spacing="2">PHASE STATE</text>
+
+  <!-- Fingerprint A (wallet A bars) -->
+  <text x="1040" y="133" font-family="'Space Mono', monospace" font-size="7.5" fill="rgba(255,255,255,0.3)">WALLET A  φ ∈ ℝ⁶⁴</text>
+  <!-- 20 bars representing the 64-dim vector -->
+  <!-- bar width=9, gap=2, starting x=1040, baseline y=165, max height=28 -->
+  <!-- heights for Wallet A (farm pattern): -->
+  <rect x="1040" y="142" width="9" height="22" fill="rgba(255,255,255,0.7)"/>
+  <rect x="1052" y="138" width="9" height="26" fill="rgba(255,255,255,0.7)"/>
+  <rect x="1064" y="145" width="9" height="19" fill="rgba(255,255,255,0.7)"/>
+  <rect x="1076" y="140" width="9" height="24" fill="rgba(255,255,255,0.7)"/>
+  <rect x="1088" y="143" width="9" height="21" fill="rgba(255,255,255,0.7)"/>
+  <rect x="1100" y="137" width="9" height="27" fill="rgba(255,255,255,0.7)"/>
+  <rect x="1112" y="144" width="9" height="20" fill="rgba(255,255,255,0.7)"/>
+  <rect x="1124" y="141" width="9" height="23" fill="rgba(255,255,255,0.7)"/>
+  <rect x="1136" y="146" width="9" height="18" fill="rgba(255,255,255,0.7)"/>
+  <rect x="1148" y="139" width="9" height="25" fill="rgba(255,255,255,0.7)"/>
+  <rect x="1160" y="142" width="9" height="22" fill="rgba(255,255,255,0.7)"/>
+  <rect x="1172" y="138" width="9" height="26" fill="rgba(255,255,255,0.7)"/>
+  <rect x="1184" y="145" width="9" height="19" fill="rgba(255,255,255,0.7)"/>
+  <rect x="1196" y="140" width="9" height="24" fill="rgba(255,255,255,0.7)"/>
+  <rect x="1208" y="143" width="9" height="21" fill="rgba(255,255,255,0.7)"/>
+  <rect x="1220" y="137" width="9" height="27" fill="rgba(255,255,255,0.7)"/>
+  <rect x="1232" y="144" width="9" height="20" fill="rgba(255,255,255,0.7)"/>
+  <rect x="1244" y="141" width="9" height="23" fill="rgba(255,255,255,0.7)"/>
+  <rect x="1256" y="146" width="9" height="18" fill="rgba(255,255,255,0.7)"/>
+  <rect x="1268" y="139" width="9" height="25" fill="rgba(255,255,255,0.7)"/>
+
+  <!-- Fingerprint B (wallet B - IDENTICAL to A) -->
+  <text x="1040" y="186" font-family="'Space Mono', monospace" font-size="7.5" fill="rgba(255,255,255,0.3)">WALLET B  φ ∈ ℝ⁶⁴</text>
+  <rect x="1040" y="193" width="9" height="22" fill="rgba(255,255,255,0.7)"/>
+  <rect x="1052" y="189" width="9" height="26" fill="rgba(255,255,255,0.7)"/>
+  <rect x="1064" y="196" width="9" height="19" fill="rgba(255,255,255,0.7)"/>
+  <rect x="1076" y="191" width="9" height="24" fill="rgba(255,255,255,0.7)"/>
+  <rect x="1088" y="194" width="9" height="21" fill="rgba(255,255,255,0.7)"/>
+  <rect x="1100" y="188" width="9" height="27" fill="rgba(255,255,255,0.7)"/>
+  <rect x="1112" y="195" width="9" height="20" fill="rgba(255,255,255,0.7)"/>
+  <rect x="1124" y="192" width="9" height="23" fill="rgba(255,255,255,0.7)"/>
+  <rect x="1136" y="197" width="9" height="18" fill="rgba(255,255,255,0.7)"/>
+  <rect x="1148" y="190" width="9" height="25" fill="rgba(255,255,255,0.7)"/>
+  <rect x="1160" y="193" width="9" height="22" fill="rgba(255,255,255,0.7)"/>
+  <rect x="1172" y="189" width="9" height="26" fill="rgba(255,255,255,0.7)"/>
+  <rect x="1184" y="196" width="9" height="19" fill="rgba(255,255,255,0.7)"/>
+  <rect x="1196" y="191" width="9" height="24" fill="rgba(255,255,255,0.7)"/>
+  <rect x="1208" y="194" width="9" height="21" fill="rgba(255,255,255,0.7)"/>
+  <rect x="1220" y="188" width="9" height="27" fill="rgba(255,255,255,0.7)"/>
+  <rect x="1232" y="195" width="9" height="20" fill="rgba(255,255,255,0.7)"/>
+  <rect x="1244" y="192" width="9" height="23" fill="rgba(255,255,255,0.7)"/>
+  <rect x="1256" y="197" width="9" height="18" fill="rgba(255,255,255,0.7)"/>
+  <rect x="1268" y="190" width="9" height="25" fill="rgba(255,255,255,0.7)"/>
+
+  <!-- Similarity score A-B -->
+  <text x="1287" y="210" font-family="'Space Mono', monospace" font-size="8" fill="rgba(255,255,255,0.5)" text-anchor="start">1.000</text>
+
+  <line x1="1040" y1="234" x2="1290" y2="234" stroke="rgba(255,255,255,0.07)" stroke-width="0.5"/>
+
+  <!-- Fingerprint C (unique wallet - DIFFERENT) -->
+  <text x="1040" y="254" font-family="'Space Mono', monospace" font-size="7.5" fill="rgba(255,255,255,0.2)">UNIQUE    φ ∈ ℝ⁶⁴</text>
+  <!-- different bar heights -->
+  <rect x="1040" y="261" width="9" height="12" fill="rgba(255,255,255,0.25)"/>
+  <rect x="1052" y="256" width="9" height="17" fill="rgba(255,255,255,0.25)"/>
+  <rect x="1064" y="265" width="9" height="8" fill="rgba(255,255,255,0.25)"/>
+  <rect x="1076" y="258" width="9" height="15" fill="rgba(255,255,255,0.25)"/>
+  <rect x="1088" y="263" width="9" height="10" fill="rgba(255,255,255,0.25)"/>
+  <rect x="1100" y="254" width="9" height="19" fill="rgba(255,255,255,0.25)"/>
+  <rect x="1112" y="260" width="9" height="13" fill="rgba(255,255,255,0.25)"/>
+  <rect x="1124" y="266" width="9" height="7" fill="rgba(255,255,255,0.25)"/>
+  <rect x="1136" y="257" width="9" height="16" fill="rgba(255,255,255,0.25)"/>
+  <rect x="1148" y="262" width="9" height="11" fill="rgba(255,255,255,0.25)"/>
+  <rect x="1160" y="255" width="9" height="18" fill="rgba(255,255,255,0.25)"/>
+  <rect x="1172" y="261" width="9" height="12" fill="rgba(255,255,255,0.25)"/>
+  <rect x="1184" y="264" width="9" height="9" fill="rgba(255,255,255,0.25)"/>
+  <rect x="1196" y="258" width="9" height="15" fill="rgba(255,255,255,0.25)"/>
+  <rect x="1208" y="263" width="9" height="10" fill="rgba(255,255,255,0.25)"/>
+  <rect x="1220" y="253" width="9" height="20" fill="rgba(255,255,255,0.25)"/>
+  <rect x="1232" y="260" width="9" height="13" fill="rgba(255,255,255,0.25)"/>
+  <rect x="1244" y="265" width="9" height="8" fill="rgba(255,255,255,0.25)"/>
+  <rect x="1256" y="257" width="9" height="16" fill="rgba(255,255,255,0.25)"/>
+  <rect x="1268" y="262" width="9" height="11" fill="rgba(255,255,255,0.25)"/>
+
+  <!-- Similarity score A-C -->
+  <text x="1287" y="278" font-family="'Space Mono', monospace" font-size="8" fill="rgba(255,255,255,0.2)" text-anchor="start">0.21</text>
+
+  <text x="1040" y="356" font-family="'Space Mono', monospace" font-size="8" fill="rgba(255,255,255,0.15)">cosine similarity threshold: 0.85</text>
+
+  <!-- Arrow 4→5 -->
+  <line x1="1312" y1="240" x2="1382" y2="240" stroke="rgba(255,255,255,0.3)" stroke-width="1" marker-end="url(#arrow)"/>
+  <text x="1347" y="230" font-family="'Space Mono', monospace" font-size="7" fill="rgba(255,255,255,0.2)" text-anchor="middle">cluster</text>
+  <text x="1347" y="256" font-family="'Space Mono', monospace" font-size="7" fill="rgba(255,255,255,0.2)" text-anchor="middle">&gt; 0.85</text>
+
+  <!-- ─────────────────────────────────────────────────────────── -->
+  <!-- BLOCK 5: Cluster Result (x=1392, w=168) -->
+  <!-- ─────────────────────────────────────────────────────────── -->
+  <rect x="1392" y="100" width="168" height="280" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+
+  <text x="1476" y="88" font-family="'Space Mono', monospace" font-size="9" fill="rgba(255,255,255,0.25)" text-anchor="middle" letter-spacing="2">RESULT</text>
+
+  <!-- SYBIL cluster: A and B connected -->
+  <text x="1408" y="140" font-family="'Space Mono', monospace" font-size="7.5" fill="rgba(255,255,255,0.35)">SYBIL RING</text>
+
+  <!-- Node A -->
+  <circle cx="1440" cy="175" r="16" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.5"/>
+  <text x="1440" y="179" font-family="'Space Mono', monospace" font-size="9" fill="rgba(255,255,255,0.7)" text-anchor="middle">A</text>
+
+  <!-- Node B -->
+  <circle cx="1510" cy="175" r="16" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.5"/>
+  <text x="1510" y="179" font-family="'Space Mono', monospace" font-size="9" fill="rgba(255,255,255,0.7)" text-anchor="middle">B</text>
+
+  <!-- Edge A-B -->
+  <line x1="1456" y1="175" x2="1494" y2="175" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/>
+
+  <!-- Similarity badge -->
+  <rect x="1420" y="200" width="110" height="18" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="0.8"/>
+  <text x="1475" y="213" font-family="'Space Mono', monospace" font-size="7.5" fill="rgba(255,255,255,0.45)" text-anchor="middle">sim = 1.000</text>
+
+  <line x1="1408" y1="236" x2="1548" y2="236" stroke="rgba(255,255,255,0.07)" stroke-width="0.5"/>
+
+  <!-- Unique wallet: isolated -->
+  <text x="1408" y="258" font-family="'Space Mono', monospace" font-size="7.5" fill="rgba(255,255,255,0.2)">UNIQUE</text>
+  <circle cx="1476" cy="290" r="16" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+  <text x="1476" y="294" font-family="'Space Mono', monospace" font-size="9" fill="rgba(255,255,255,0.2)" text-anchor="middle">C</text>
+
+  <!-- ─────────────────────────────────────────────────────────── -->
+  <!-- Footer label -->
+  <!-- ─────────────────────────────────────────────────────────── -->
+  <text x="800" y="465" font-family="'Space Mono', monospace" font-size="10" fill="rgba(255,255,255,0.12)" text-anchor="middle" letter-spacing="3">quifer — PHASE-ROTATION FINGERPRINTING PIPELINE</text>
+
+</svg>

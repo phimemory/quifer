@@ -6,15 +6,7 @@ Each wallet's full transaction history gets compressed into a 64-dimensional pha
 
 ## How it works
 
-```mermaid
-flowchart LR
-    W[Wallet address] --> T[Transaction history]
-    T -->|ordered by block| H[Helix phase cell]
-    H --> P[64-dim phase state]
-    P --> S{cosine similarity}
-    S -->|sim above 0.85| R[Sybil ring]
-    S -->|sim below 0.85| U[Unique wallet]
-```
+![quifer pipeline](assets/architecture.svg)
 
 Transaction order matters. Two wallets with identical transactions in different order get different fingerprints. Standard feature vectors lose this. Phase accumulation does not.
 
